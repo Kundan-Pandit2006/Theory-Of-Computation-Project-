@@ -149,4 +149,5 @@ Built as an educational tool for understanding computational theory.
 ---
 
 **Server**:theory-of-computation-project.vercel.app
+
 **Ready to explore the Turing machine!** 
