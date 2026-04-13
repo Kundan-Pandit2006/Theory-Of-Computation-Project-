@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TURING // MACHINE</title>
+  <title>TURING MACHINE</title>
   <meta name="description"
     content="Universal Turing Machine Simulator — visualize computation, transitions, and state diagrams.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -230,10 +230,22 @@
 
           <!-- Presets -->
           <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="margin-bottom: 8px;">
               <div class="card-icon amber">⚡</div>
               <h3>Preset Machines</h3>
             </div>
+            
+            <div class="info-panel" style="margin-bottom: 15px; font-size: 0.75rem; color: var(--text-2); background: var(--surface-2); padding: 12px; border-radius: 8px; border: 1px solid var(--border-2);">
+              <div style="font-weight: 600; margin-bottom: 6px; color: var(--text);">Instructions:</div>
+              <ul style="margin: 0; padding-left: 20px; margin-bottom: 8px; line-height: 1.5;">
+                <li>The dashboard displays the first set of preset machines by default.</li>
+                <li>Additional machines can be accessed by scrolling within this panel.</li>
+                <li>Click on any machine to load its transition rules and input.</li>
+                <li>Press "Run" to execute the selected Turing Machine.</li>
+              </ul>
+              <div style="font-style: italic; opacity: 0.8; font-size: 0.7rem;">Note: Scrolling is enabled within this section to maintain a clean and organized interface.</div>
+            </div>
+
             <div class="preset-grid">
               <button class="preset-btn" data-preset="increment">
                 <span class="preset-name">Binary Increment</span>
@@ -266,6 +278,94 @@
               <button class="preset-btn" data-preset="divBy3">
                 <span class="preset-name">Divisible by 3</span>
                 <span class="preset-desc">unary mod-3 checker</span>
+              </button>
+              <button class="preset-btn" data-preset="evenOnes">
+                <span class="preset-name">Even Number of 1s</span>
+                <span class="preset-desc">accept if #1s is even</span>
+              </button>
+              <button class="preset-btn" data-preset="endsWith01">
+                <span class="preset-name">Ends With 01</span>
+                <span class="preset-desc">pattern suffix check</span>
+              </button>
+              <button class="preset-btn" data-preset="contains101">
+                <span class="preset-name">Contains 101</span>
+                <span class="preset-desc">substring search</span>
+              </button>
+              <button class="preset-btn" data-preset="zerosOnes">
+                <span class="preset-name">0ⁿ1ᵐ Format</span>
+                <span class="preset-desc">all 0s then all 1s</span>
+              </button>
+              <button class="preset-btn" data-preset="equalZerosOnes">
+                <span class="preset-name">Equal 0s and 1s</span>
+                <span class="preset-desc">count matching</span>
+              </button>
+              <button class="preset-btn" data-preset="anbncn">
+                <span class="preset-name">aⁿbⁿcⁿ</span>
+                <span class="preset-desc">triple count match</span>
+              </button>
+              <button class="preset-btn" data-preset="divBy2">
+                <span class="preset-name">Divisible by 2</span>
+                <span class="preset-desc">binary even check</span>
+              </button>
+              <button class="preset-btn" data-preset="palindromeHash">
+                <span class="preset-name">w#wᴿ Palindrome</span>
+                <span class="preset-desc">separated mirror</span>
+              </button>
+              <button class="preset-btn" data-preset="doubleCount">
+                <span class="preset-name">#0s = 2 × #1s</span>
+                <span class="preset-desc">ratio counting</span>
+              </button>
+              <button class="preset-btn" data-preset="unaryMul">
+                <span class="preset-name">Unary Multiply</span>
+                <span class="preset-desc">111*11 = 111111</span>
+              </button>
+              <button class="preset-btn" data-preset="binaryAdd">
+                <span class="preset-name">Binary Addition</span>
+                <span class="preset-desc">101+11 = 1000</span>
+              </button>
+              <button class="preset-btn" data-preset="oddOnes">
+                <span class="preset-name">Odd Number of 1s</span>
+                <span class="preset-desc">counts odd occurrences</span>
+              </button>
+              <button class="preset-btn" data-preset="start0end1">
+                <span class="preset-name">Starts 0, Ends 1</span>
+                <span class="preset-desc">match pattern 0...1</span>
+              </button>
+              <button class="preset-btn" data-preset="contains00or11">
+                <span class="preset-name">Contains 00 or 11</span>
+                <span class="preset-desc">consecutive symbols</span>
+              </button>
+              <button class="preset-btn" data-preset="noConsecutive1s">
+                <span class="preset-name">No Consecutive 1s</span>
+                <span class="preset-desc">rejects adjacent 1s</span>
+              </button>
+              <button class="preset-btn" data-preset="exactlyTwo1s">
+                <span class="preset-name">Exactly Two 1s</span>
+                <span class="preset-desc">exact count matching</span>
+              </button>
+              <button class="preset-btn" data-preset="evenLength">
+                <span class="preset-name">Even Length</span>
+                <span class="preset-desc">length |w| mod 2 = 0</span>
+              </button>
+              <button class="preset-btn" data-preset="lengthMod3">
+                <span class="preset-name">Length Mod 3 = 0</span>
+                <span class="preset-desc">length |w| mod 3 = 0</span>
+              </button>
+              <button class="preset-btn" data-preset="moreZeros">
+                <span class="preset-name">More 0s than 1s</span>
+                <span class="preset-desc">count 0s > count 1s</span>
+              </button>
+              <button class="preset-btn" data-preset="reverseString">
+                <span class="preset-name">Reverse String</span>
+                <span class="preset-desc">Transducer: w → wᴿ</span>
+              </button>
+              <button class="preset-btn" data-preset="replace0with1">
+                <span class="preset-name">Replace 0 with 1</span>
+                <span class="preset-desc">Transducer map: 0→1</span>
+              </button>
+              <button class="preset-btn" data-preset="removeAll1s">
+                <span class="preset-name">Remove All 1s</span>
+                <span class="preset-desc">Transducer cleanup: 101→0</span>
               </button>
             </div>
           </div>
@@ -430,6 +530,10 @@ q1, _, 1, L, qStop</textarea>
 
   <!-- Toast container -->
   <div class="toast-container" id="toast-container"></div>
+
+  <footer style="text-align: center; padding: 30px 20px 20px; font-size: 0.85rem; color: var(--text-2); margin-top: auto; font-family: 'Plus Jakarta Sans', sans-serif;">
+    Designed and Developed by <span style="color: var(--amber); font-weight: 700;">Kundan Pandit</span> &nbsp;|&nbsp; Roll No. - 2024UCS1514
+  </footer>
 
   <script src="script.js"></script>
 </body>

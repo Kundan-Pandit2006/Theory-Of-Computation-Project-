@@ -173,10 +173,301 @@ q5, _, _, R, q0`
     rules: `q0, a, X, R, q1\nq0, Y, Y, R, q3\nq0, _, _, R, qAccept\nq1, a, a, R, q1\nq1, Y, Y, R, q1\nq1, b, Y, L, q2\nq1, _, _, R, qReject\nq2, a, a, L, q2\nq2, Y, Y, L, q2\nq2, X, X, R, q0\nq3, Y, Y, R, q3\nq3, _, _, R, qAccept\nq3, b, b, R, qReject`
   },
   // Divisible by 3 — unary representation, counts mod 3
-  // Input: unary number (e.g. 111111 for 6)  accept if divisible by 3
+  // q0=mod0(accept), q1=mod1(reject), q2=mod2(reject)
   divBy3: {
     tape: '111111',
-    rules: `q0, 1, 1, R, q1\nq0, _, _, R, qAccept\nq1, 1, 1, R, q2\nq1, _, _, R, qReject\nq2, 1, 1, R, q0\nq2, _, _, R, qAccept`
+    rules: `q0, 1, 1, R, q1\nq0, _, _, R, qAccept\nq1, 1, 1, R, q2\nq1, _, _, R, qReject\nq2, 1, 1, R, q0\nq2, _, _, R, qReject`
+  },
+  // Even number of 1s — q0 = even (accept), q1 = odd (reject)
+  evenOnes: {
+    tape: '1010',
+    rules: `q0, 0, 0, R, q0
+q0, 1, 1, R, q1
+q0, _, _, R, qAccept
+q1, 0, 0, R, q1
+q1, 1, 1, R, q0
+q1, _, _, R, qReject`
+  },
+  // Ends with 01 — DFA: q0=start, q1=saw 0, q2=saw 01
+  endsWith01: {
+    tape: '1101',
+    rules: `q0, 0, 0, R, q1
+q0, 1, 1, R, q0
+q0, _, _, R, qReject
+q1, 0, 0, R, q1
+q1, 1, 1, R, q2
+q1, _, _, R, qReject
+q2, 0, 0, R, q1
+q2, 1, 1, R, q0
+q2, _, _, R, qAccept`
+  },
+  // Contains substring 101
+  contains101: {
+    tape: '110101',
+    rules: `q0, 0, 0, R, q0
+q0, 1, 1, R, q1
+q0, _, _, R, qReject
+q1, 0, 0, R, q2
+q1, 1, 1, R, q1
+q1, _, _, R, qReject
+q2, 0, 0, R, q0
+q2, 1, 1, R, qF
+q2, _, _, R, qReject
+qF, 0, 0, R, qF
+qF, 1, 1, R, qF
+qF, _, _, R, qAccept`
+  },
+  // All 0s followed by 1s (0^n 1^m)
+  zerosOnes: {
+    tape: '000111',
+    rules: `q0, 0, 0, R, q0
+q0, 1, 1, R, q1
+q0, _, _, R, qAccept
+q1, 1, 1, R, q1
+q1, 0, 0, R, qReject
+q1, _, _, R, qAccept`
+  },
+  // Equal number of 0s and 1s — mark-and-match
+  equalZerosOnes: {
+    tape: '1010',
+    rules: `q0, X, X, R, q0
+q0, Y, Y, R, q0
+q0, 0, X, R, q1
+q0, 1, Y, R, q3
+q0, _, _, R, qAccept
+q1, 0, 0, R, q1
+q1, Y, Y, R, q1
+q1, 1, Y, L, q2
+q1, _, _, R, qReject
+q2, 0, 0, L, q2
+q2, Y, Y, L, q2
+q2, X, X, R, q0
+q3, 1, 1, R, q3
+q3, X, X, R, q3
+q3, 0, X, L, q4
+q3, _, _, R, qReject
+q4, 1, 1, L, q4
+q4, X, X, L, q4
+q4, Y, Y, R, q0`
+  },
+  // a^n b^n c^n — triple-marker approach
+  anbncn: {
+    tape: 'aaabbbccc',
+    rules: `q0, a, X, R, q1
+q0, Y, Y, R, q5
+q0, _, _, R, qAccept
+q1, a, a, R, q1
+q1, Y, Y, R, q1
+q1, b, Y, R, q2
+q1, _, _, R, qReject
+q2, b, b, R, q2
+q2, Z, Z, R, q2
+q2, c, Z, L, q3
+q2, _, _, R, qReject
+q3, a, a, L, q3
+q3, b, b, L, q3
+q3, Y, Y, L, q3
+q3, Z, Z, L, q3
+q3, X, X, R, q0
+q5, Y, Y, R, q5
+q5, Z, Z, R, q5
+q5, _, _, R, qAccept
+q5, a, a, R, qReject
+q5, b, b, R, qReject
+q5, c, c, R, qReject`
+  },
+  // Divisible by 2 (binary) — accept if last bit is 0
+  divBy2: {
+    tape: '1010',
+    rules: `q0, 0, 0, R, q1
+q0, 1, 1, R, q2
+q0, _, _, R, qReject
+q1, 0, 0, R, q1
+q1, 1, 1, R, q2
+q1, _, _, R, qAccept
+q2, 0, 0, R, q1
+q2, 1, 1, R, q2
+q2, _, _, R, qReject`
+  },
+  // w#wᴿ palindrome — compare first of left with LAST of right
+  // q0: read+mark leftmost char; q1/q3: scan right to #; q2/q4: find rightmost on right; q6: go back left
+  palindromeHash: {
+    tape: '101#101',
+    rules: `q0, 0, X, R, q1
+q0, 1, X, R, q3
+q0, #, #, R, q7
+q1, 0, 0, R, q1
+q1, 1, 1, R, q1
+q1, #, #, R, q2
+q2, 0, 0, R, q2
+q2, 1, 1, R, q2
+q2, Y, Y, R, q2
+q2, _, _, L, q2B
+q2B, Y, Y, L, q2B
+q2B, 0, Y, L, q6
+q2B, 1, 1, L, qReject
+q2B, #, #, L, qReject
+q3, 0, 0, R, q3
+q3, 1, 1, R, q3
+q3, #, #, R, q4
+q4, 0, 0, R, q4
+q4, 1, 1, R, q4
+q4, Y, Y, R, q4
+q4, _, _, L, q4B
+q4B, Y, Y, L, q4B
+q4B, 1, Y, L, q6
+q4B, 0, 0, L, qReject
+q4B, #, #, L, qReject
+q6, 0, 0, L, q6
+q6, 1, 1, L, q6
+q6, Y, Y, L, q6
+q6, #, #, L, q6
+q6, X, X, R, q0
+q7, Y, Y, R, q7
+q7, _, _, R, qAccept
+q7, 0, 0, R, qReject
+q7, 1, 1, R, qReject`
+  },
+  // Count of 0s = 2 × count of 1s
+  // Scan to find a 1, mark it Y, then find and mark two 0s as X. Repeat.
+  // q0: scan right for next 1; qA: scan left for first 0; qB: scan left for second 0
+  // qC: return right to continue; q4: verify all consumed
+  doubleCount: {
+    tape: '001',
+    rules: `q0, 0, 0, R, q0
+q0, X, X, R, q0
+q0, Y, Y, R, q0
+q0, 1, Y, L, qA
+q0, _, _, L, q4
+qA, 0, X, L, qB
+qA, X, X, L, qA
+qA, Y, Y, L, qA
+qA, _, _, R, qReject
+qB, 0, X, R, qC
+qB, X, X, L, qB
+qB, Y, Y, L, qB
+qB, _, _, R, qReject
+qC, 0, 0, R, qC
+qC, X, X, R, qC
+qC, Y, Y, R, qC
+qC, 1, Y, L, qA
+qC, _, _, L, q4
+q4, X, X, L, q4
+q4, Y, Y, L, q4
+q4, 0, 0, L, qReject
+q4, 1, 1, L, qReject
+q4, _, _, R, qAccept`
+  },
+  // Unary multiplication — 1^n * 1^m = 1^(n*m)
+  unaryMul: {
+    tape: '111*11',
+    rules: `q0, 1, 0, R, q1
+q0, *, *, R, q6
+q1, 1, 1, R, q1
+q1, *, *, R, q2
+q2, 1, X, L, q3
+q2, _, _, L, q5
+q2, X, X, R, q2
+q3, X, X, L, q3
+q3, *, *, L, q3
+q3, 1, 1, L, q3
+q3, 0, 0, L, q3
+q3, _, 1, R, q4
+q4, 0, 0, R, q4
+q4, 1, 1, R, q4
+q4, *, *, R, q2
+q5, X, 1, L, q5
+q5, *, *, L, q5
+q5, 1, 1, L, q5
+q5, 0, 0, R, q0
+q6, 1, _, R, q6
+q6, X, _, R, q6
+q6, _, _, L, qStop`
+  },
+  // Binary addition — 101+11 = 1000
+  // Strategy: decrement B, increment A, repeat until B = 0
+  binaryAdd: {
+    tape: '101+11',
+    rules: `q0, 0, 0, R, q0
+q0, 1, 1, R, q0
+q0, +, +, R, q0
+q0, _, _, L, qDecB
+qDecB, 1, 0, L, qGo
+qDecB, 0, 1, L, qDecB
+qDecB, +, +, R, qClnB
+qGo, 0, 0, L, qGo
+qGo, 1, 1, L, qGo
+qGo, +, +, L, qIncA
+qIncA, 0, 1, R, qLoop
+qIncA, 1, 0, L, qIncA
+qIncA, _, 1, R, qLoop
+qLoop, 0, 0, R, qLoop
+qLoop, 1, 1, R, qLoop
+qLoop, +, +, R, qLoop
+qLoop, _, _, L, qDecB
+qClnB, 1, _, R, qClnB
+qClnB, 0, _, R, qClnB
+qClnB, _, _, L, qClnP
+qClnP, _, _, L, qClnP
+qClnP, +, _, R, qFin
+qFin, _, _, L, qStop
+qFin, 0, 0, R, qFin
+qFin, 1, 1, R, qFin`
+  },
+  // Odd Number of 1s
+  oddOnes: {
+    tape: '111',
+    rules: `q0, 0, 0, R, q0\nq0, 1, 1, R, q1\nq0, _, _, R, qReject\nq1, 0, 0, R, q1\nq1, 1, 1, R, q0\nq1, _, _, R, qAccept`
+  },
+  // Starts with 0 and Ends with 1
+  start0end1: {
+    tape: '0101',
+    rules: `q0, 0, 0, R, q1\nq0, 1, 1, R, qReject\nq0, _, _, R, qReject\nq1, 0, 0, R, q1\nq1, 1, 1, R, q2\nq1, _, _, R, qReject\nq2, 0, 0, R, q1\nq2, 1, 1, R, q2\nq2, _, _, R, qAccept`
+  },
+  // Contains Equal Consecutive Symbols (00 or 11)
+  contains00or11: {
+    tape: '1100',
+    rules: `q0, 0, 0, R, q1\nq0, 1, 1, R, q2\nq0, _, _, R, qReject\nq1, 0, 0, R, qAccept\nq1, 1, 1, R, q2\nq1, _, _, R, qReject\nq2, 1, 1, R, qAccept\nq2, 0, 0, R, q1\nq2, _, _, R, qReject`
+  },
+  // No Consecutive 1s
+  noConsecutive1s: {
+    tape: '101010',
+    rules: `q0, 0, 0, R, q0\nq0, 1, 1, R, q1\nq0, _, _, R, qAccept\nq1, 0, 0, R, q0\nq1, 1, 1, R, qReject\nq1, _, _, R, qAccept`
+  },
+  // Exactly Two 1s
+  exactlyTwo1s: {
+    tape: '1001',
+    rules: `q0, 0, 0, R, q0\nq0, 1, 1, R, q1\nq0, _, _, R, qReject\nq1, 0, 0, R, q1\nq1, 1, 1, R, q2\nq1, _, _, R, qReject\nq2, 0, 0, R, q2\nq2, 1, 1, R, qReject\nq2, _, _, R, qAccept`
+  },
+  // String Length is Even
+  evenLength: {
+    tape: '1010',
+    rules: `q0, 0, 0, R, q1\nq0, 1, 1, R, q1\nq0, _, _, R, qAccept\nq1, 0, 0, R, q0\nq1, 1, 1, R, q0\nq1, _, _, R, qReject`
+  },
+  // String Length is Multiple of 3
+  lengthMod3: {
+    tape: '101010',
+    rules: `q0, 0, 0, R, q1\nq0, 1, 1, R, q1\nq0, _, _, R, qAccept\nq1, 0, 0, R, q2\nq1, 1, 1, R, q2\nq1, _, _, R, qReject\nq2, 0, 0, R, q0\nq2, 1, 1, R, q0\nq2, _, _, R, qReject`
+  },
+  // More 0s than 1s
+  moreZeros: {
+    tape: '0001',
+    rules: `q0, X, X, R, q0\nq0, Y, Y, R, q0\nq0, 0, X, R, q1\nq0, 1, Y, R, q3\nq0, _, _, R, qReject\nq1, 0, 0, R, q1\nq1, Y, Y, R, q1\nq1, 1, Y, L, q2\nq1, _, _, R, qAccept\nq3, 1, 1, R, q3\nq3, X, X, R, q3\nq3, Y, Y, R, q3\nq3, 0, X, L, q2\nq3, _, _, R, qReject\nq2, 0, 0, L, q2\nq2, 1, 1, L, q2\nq2, X, X, L, q2\nq2, Y, Y, L, q2\nq2, _, _, R, q0`
+  },
+  // Reverse String (Transducer) w -> wR
+  reverseString: {
+    tape: '1011',
+    rules: `q0, 0, 0, R, q0\nq0, 1, 1, R, q0\nq0, _, #, L, qGet\nqGet, 0, #, R, qC0\nqGet, 1, #, R, qC1\nqGet, _, _, R, qClean\nqC0, #, #, R, qC0\nqC0, 0, 0, R, qC0\nqC0, 1, 1, R, qC0\nqC0, _, 0, L, qRet\nqC1, #, #, R, qC1\nqC1, 0, 0, R, qC1\nqC1, 1, 1, R, qC1\nqC1, _, 1, L, qRet\nqRet, 0, 0, L, qRet\nqRet, 1, 1, L, qRet\nqRet, #, #, L, qRet2\nqRet2, #, #, L, qRet2\nqRet2, 0, 0, R, qReady\nqRet2, 1, 1, R, qReady\nqRet2, _, _, R, qClean\nqReady, #, #, L, qGet\nqClean, #, _, R, qClean\nqClean, 0, 0, L, qStop\nqClean, 1, 1, L, qStop\nqClean, _, _, R, qStop`
+  },
+  // Replace 0 with 1
+  replace0with1: {
+    tape: '10010',
+    rules: `q0, 0, 1, R, q0\nq0, 1, 1, R, q0\nq0, _, _, L, qStop`
+  },
+  // Remove All 1s
+  removeAll1s: {
+    tape: '101010',
+    rules: `q0, 0, 0, R, q0\nq0, 1, 1, R, q0\nq0, _, #, L, qRewind\nqRewind, 0, 0, L, qRewind\nqRewind, 1, 1, L, qRewind\nqRewind, _, _, R, qRead\nqRead, 1, _, R, qRead\nqRead, 0, _, R, qCopy0\nqRead, #, _, R, qStop\nqCopy0, 0, 0, R, qCopy0\nqCopy0, 1, 1, R, qCopy0\nqCopy0, #, #, R, qCopy0\nqCopy0, _, 0, L, qRet\nqRet, 0, 0, L, qRet\nqRet, 1, 1, L, qRet\nqRet, #, #, L, qRet\nqRet, _, _, R, qRead`
   }
 };
 
