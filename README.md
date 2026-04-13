@@ -14,7 +14,7 @@ This is a fully functional Turing Machine simulator with an educational home pag
 ### 🔧 Simulator Page (`/demonstration`)
 - **Setup View**: Configure tapes and transition rules
 - **Run View**: Execute the machine step-by-step or automatically
-- **Preset Machines**: 8 pre-configured examples:
+- **Preset Machines**: 30 pre-configured examples some of them are given below:
   - Binary Increment
   - Binary Decrement
   - 1's Complement
@@ -50,8 +50,7 @@ python server.py
 ```
 
 ### Access the Website
-- **Home Page**: http://localhost:8000/
-- **Simulator**: http://localhost:8000/demonstration
+-theory-of-computation-project.vercel.app
 
 ### Stop the Server
 Press `Ctrl+C` in the terminal
@@ -149,5 +148,5 @@ Built as an educational tool for understanding computational theory.
 
 ---
 
-**Server**: http://localhost:8000 ✅  
-**Ready to explore the Turing machine!** 🎯
+**Server**:theory-of-computation-project.vercel.app
+**Ready to explore the Turing machine!** 
