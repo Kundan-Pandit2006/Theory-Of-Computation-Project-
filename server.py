@@ -46,6 +46,10 @@ class SPAHandler(http.server.SimpleHTTPRequestHandler):
         print(f"[{self.client_address[0]}] {format % args}")
 
 if __name__ == '__main__':
+    # Fix encoding for Windows consoles
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
     # Change to the script directory
     os.chdir(CURRENT_DIR)
     

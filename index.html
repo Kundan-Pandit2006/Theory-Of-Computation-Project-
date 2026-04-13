@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TURING // MACHINE</title>
-  <meta name="description" content="Universal Turing Machine Simulator — visualize computation, transitions, and state diagrams.">
+  <meta name="description"
+    content="Universal Turing Machine Simulator — visualize computation, transitions, and state diagrams.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -31,7 +32,7 @@
       <div class="header-brand">
         <div class="brand-mark"><span>TM</span></div>
         <div class="brand-title">
-          <h1>TURING  MACHINE</h1>
+          <h1>TURING MACHINE</h1>
           <small>UNIVERSAL COMPUTATION SIMULATOR</small>
         </div>
       </div>
@@ -51,21 +52,23 @@
         <div class="hero-content">
           <h2 class="hero-title">Understanding the Turing Machine</h2>
           <p class="hero-subtitle">A Universal Model of Computation</p>
-          <p class="hero-description">Explore the theoretical foundations of computer science through Alan Turing's revolutionary concept that fundamentally changed our understanding of computation and computability.</p>
+          <p class="hero-description">Explore the theoretical foundations of computer science through Alan Turing's
+            revolutionary concept that fundamentally changed our understanding of computation and computability.</p>
           <a href="/demonstration" class="btn btn-primary btn-large">Launch Simulator</a>
         </div>
         <div class="hero-graphic">
           <svg viewBox="0 0 300 250" class="turing-machine-svg">
             <!-- Tape -->
             <g class="tape">
-              <rect x="30" y="120" width="240" height="40" fill="var(--surface-2)" stroke="var(--coffee)" stroke-width="2" rx="3"/>
-              <line x1="60" y1="120" x2="60" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5"/>
-              <line x1="90" y1="120" x2="90" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5"/>
-              <line x1="120" y1="120" x2="120" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5"/>
-              <line x1="150" y1="120" x2="150" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5"/>
-              <line x1="180" y1="120" x2="180" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5"/>
-              <line x1="210" y1="120" x2="210" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5"/>
-              <line x1="240" y1="120" x2="240" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5"/>
+              <rect x="30" y="120" width="240" height="40" fill="var(--surface-2)" stroke="var(--coffee)"
+                stroke-width="2" rx="3" />
+              <line x1="60" y1="120" x2="60" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5" />
+              <line x1="90" y1="120" x2="90" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5" />
+              <line x1="120" y1="120" x2="120" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5" />
+              <line x1="150" y1="120" x2="150" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5" />
+              <line x1="180" y1="120" x2="180" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5" />
+              <line x1="210" y1="120" x2="210" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5" />
+              <line x1="240" y1="120" x2="240" y2="160" stroke="var(--coffee)" stroke-width="1" opacity="0.5" />
               <!-- Cells -->
               <text x="45" y="148" font-size="14" font-weight="bold" fill="var(--text)">0</text>
               <text x="75" y="148" font-size="14" font-weight="bold" fill="var(--text)">1</text>
@@ -77,20 +80,25 @@
             </g>
             <!-- Read/Write Head -->
             <g class="head">
-              <polygon points="150,60 140,80 160,80" fill="var(--coffee)"/>
-              <rect x="145" y="75" width="10" height="15" fill="var(--amber)" stroke="var(--amber)" stroke-width="1"/>
-              <circle cx="150" cy="90" r="3" fill="var(--green)"/>
+              <polygon points="150,60 140,80 160,80" fill="var(--coffee)" />
+              <rect x="145" y="75" width="10" height="15" fill="var(--amber)" stroke="var(--amber)" stroke-width="1" />
+              <circle cx="150" cy="90" r="3" fill="var(--green)" />
             </g>
             <!-- State Register -->
             <g class="state-box">
-              <rect x="230" y="30" width="50" height="40" fill="var(--coffee-dim)" stroke="var(--coffee)" stroke-width="2" rx="4"/>
-              <text x="255" y="48" font-size="10" font-weight="bold" fill="var(--coffee)" text-anchor="middle">State</text>
-              <text x="255" y="62" font-size="9" fill="var(--text)" text-anchor="middle" font-family="monospace">q0</text>
+              <rect x="230" y="30" width="50" height="40" fill="var(--coffee-dim)" stroke="var(--coffee)"
+                stroke-width="2" rx="4" />
+              <text x="255" y="48" font-size="10" font-weight="bold" fill="var(--coffee)"
+                text-anchor="middle">State</text>
+              <text x="255" y="62" font-size="9" fill="var(--text)" text-anchor="middle"
+                font-family="monospace">q0</text>
             </g>
             <!-- Movement arrows -->
             <g class="arrows">
-              <path d="M 150 75 Q 170 100 190 120" stroke="var(--coffee)" stroke-width="1.5" fill="none" stroke-dasharray="3,3" opacity="0.6"/>
-              <path d="M 150 75 Q 130 100 110 120" stroke="var(--amber)" stroke-width="1.5" fill="none" stroke-dasharray="3,3" opacity="0.6"/>
+              <path d="M 150 75 Q 170 100 190 120" stroke="var(--coffee)" stroke-width="1.5" fill="none"
+                stroke-dasharray="3,3" opacity="0.6" />
+              <path d="M 150 75 Q 130 100 110 120" stroke="var(--amber)" stroke-width="1.5" fill="none"
+                stroke-dasharray="3,3" opacity="0.6" />
             </g>
           </svg>
         </div>
@@ -101,22 +109,26 @@
           <div class="feature-card">
             <div class="feature-icon">📼</div>
             <h3>Infinite Tape</h3>
-            <p>An unbounded memory strip that serves as the Turing machine's storage mechanism, allowing it to read, write, and move symbols.</p>
+            <p>An unbounded memory strip that serves as the Turing machine's storage mechanism, allowing it to read,
+              write, and move symbols.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🎯</div>
             <h3>State Machine</h3>
-            <p>A finite set of states that control the machine's behavior, with transitions based on the current state and symbol read from the tape.</p>
+            <p>A finite set of states that control the machine's behavior, with transitions based on the current state
+              and symbol read from the tape.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">⚙️</div>
             <h3>Transition Rules</h3>
-            <p>Deterministic rules that specify how the machine reads, writes, and moves, defining the computation's logic.</p>
+            <p>Deterministic rules that specify how the machine reads, writes, and moves, defining the computation's
+              logic.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">✨</div>
             <h3>Universal Computation</h3>
-            <p>The Turing machine can theoretically compute any function that is computable, making it a model for all possible algorithms.</p>
+            <p>The Turing machine can theoretically compute any function that is computable, making it a model for all
+              possible algorithms.</p>
           </div>
         </div>
       </section>
@@ -124,29 +136,35 @@
       <section class="description-section">
         <div class="description-content">
           <h3>What is a Turing Machine?</h3>
-          <p>A Turing machine is an abstract computing device conceived by British mathematician Alan Turing in 1936. It consists of:</p>
-          
+          <p>A Turing machine is an abstract computing device conceived by British mathematician Alan Turing in 1936. It
+            consists of:</p>
+
           <div class="components">
             <div class="component">
               <h4>1. Infinite Tape</h4>
-              <p>Divided into cells, each containing a symbol (0, 1, or blank). The tape represents memory that can be read and written to at any time.</p>
+              <p>Divided into cells, each containing a symbol (0, 1, or blank). The tape represents memory that can be
+                read and written to at any time.</p>
             </div>
             <div class="component">
               <h4>2. Read/Write Head</h4>
-              <p>Scans one cell at a time on the tape. It can read the symbol, write a new symbol, and move left or right.</p>
+              <p>Scans one cell at a time on the tape. It can read the symbol, write a new symbol, and move left or
+                right.</p>
             </div>
             <div class="component">
               <h4>3. State Register</h4>
-              <p>Stores the machine's current state. The state determines how the machine responds to the symbol it reads.</p>
+              <p>Stores the machine's current state. The state determines how the machine responds to the symbol it
+                reads.</p>
             </div>
             <div class="component">
               <h4>4. Control Logic</h4>
-              <p>A set of transition rules that define the machine's behavior: based on the current state and symbol, it writes a new symbol, moves the head, and transitions to a new state.</p>
+              <p>A set of transition rules that define the machine's behavior: based on the current state and symbol, it
+                writes a new symbol, moves the head, and transitions to a new state.</p>
             </div>
           </div>
 
           <h3>The Church-Turing Thesis</h3>
-          <p>The Church-Turing thesis proposes that any function that can be computed by an algorithm can be computed by a Turing machine. This fundamental principle underpins modern computer science and computational theory.</p>
+          <p>The Church-Turing thesis proposes that any function that can be computed by an algorithm can be computed by
+            a Turing machine. This fundamental principle underpins modern computer science and computational theory.</p>
 
           <h3>How It Works</h3>
           <p>When a Turing machine runs:</p>
@@ -182,227 +200,231 @@
       <div id="setup-view" class="active">
         <div class="setup-grid">
 
-        <!-- Tape Input -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-icon coffee">📼</div>
-            <h3>Initial Tape</h3>
+          <!-- Tape Input -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon coffee">📼</div>
+              <h3>Initial Tape</h3>
+            </div>
+            <label>Tape Content <small style="text-transform:none;font-size:0.68rem;color:var(--text-3)">(supports TAFL
+                sequences)</small></label>
+            <div class="tape-input-row">
+              <input type="text" id="initial-tape" value="1011" autocomplete="off" spellcheck="false"
+                placeholder="e.g. 1011 or (0)*4">
+              <button class="btn btn-outline btn-icon" id="btn-parse-tape" title="Generate Permutations">⚡</button>
+            </div>
+            <div class="input-hint">Use TAFL: <code style="color:var(--coffee);font-size:0.7rem">(0)*4</code> &nbsp;
+              <code style="color:var(--coffee);font-size:0.7rem">0*|1*</code>. Kleene star (*) generates combinations!
+            </div>
+            <div id="tafl-multiverse-container"
+              style="display:none; margin-top: 12px; padding: 14px; background: var(--coffee-dim); border: 1px solid rgba(111,78,55,0.2); border-radius: 8px;">
+              <div
+                style="font-size: 0.72rem; color: var(--coffee); margin-bottom: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+                ☕ Multiverse Tapes Generated:</div>
+              <div id="tafl-results" class="expr-tags"></div>
+              <div
+                style="font-size: 0.62rem; color: var(--text-2); margin-top: 8px; border-top: 1px solid rgba(111,78,55,0.1); padding-top: 6px;">
+                Click a generated sequence to inject it directly into the execution tape.</div>
+            </div>
           </div>
-          <label>Tape Content <small style="text-transform:none;font-size:0.68rem;color:var(--text-3)">(supports TAFL sequences)</small></label>
-          <div class="tape-input-row">
-            <input type="text" id="initial-tape" value="1011" autocomplete="off" spellcheck="false"
-              placeholder="e.g. 1011 or (0)*4">
-            <button class="btn btn-outline btn-icon" id="btn-parse-tape" title="Generate Permutations">⚡</button>
-          </div>
-          <div class="input-hint">Use TAFL: <code style="color:var(--coffee);font-size:0.7rem">(0)*4</code> &nbsp; <code
-              style="color:var(--coffee);font-size:0.7rem">0*|1*</code>. Kleene star (*) generates combinations!</div>
-          <div id="tafl-multiverse-container"
-            style="display:none; margin-top: 12px; padding: 14px; background: var(--coffee-dim); border: 1px solid rgba(111,78,55,0.2); border-radius: 8px;">
-            <div style="font-size: 0.72rem; color: var(--coffee); margin-bottom: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
-              ☕ Multiverse Tapes Generated:</div>
-            <div id="tafl-results" class="expr-tags"></div>
-            <div style="font-size: 0.62rem; color: var(--text-2); margin-top: 8px; border-top: 1px solid rgba(111,78,55,0.1); padding-top: 6px;">
-              Click a generated sequence to inject it directly into the execution tape.</div>
-          </div>
-        </div>
 
-        <!-- Presets -->
-        <div class="card">
-          <div class="card-header">
-            <div class="card-icon amber">⚡</div>
-            <h3>Preset Machines</h3>
+          <!-- Presets -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon amber">⚡</div>
+              <h3>Preset Machines</h3>
+            </div>
+            <div class="preset-grid">
+              <button class="preset-btn" data-preset="increment">
+                <span class="preset-name">Binary Increment</span>
+                <span class="preset-desc">n → n+1</span>
+              </button>
+              <button class="preset-btn" data-preset="decrement">
+                <span class="preset-name">Binary Decrement</span>
+                <span class="preset-desc">n → n−1</span>
+              </button>
+              <button class="preset-btn" data-preset="onesComp">
+                <span class="preset-name">1's Complement</span>
+                <span class="preset-desc">flip all bits</span>
+              </button>
+              <button class="preset-btn" data-preset="twosComp">
+                <span class="preset-name">2's Complement</span>
+                <span class="preset-desc">negative integer</span>
+              </button>
+              <button class="preset-btn" data-preset="palindrome">
+                <span class="preset-name">Palindrome Check</span>
+                <span class="preset-desc">accepts 0/1 strings</span>
+              </button>
+              <button class="preset-btn" data-preset="unaryAdd">
+                <span class="preset-name">Unary Addition</span>
+                <span class="preset-desc">111+11 = 11111</span>
+              </button>
+              <button class="preset-btn" data-preset="anbn">
+                <span class="preset-name">Equal aⁿbⁿ</span>
+                <span class="preset-desc">accepts aⁿbⁿ strings</span>
+              </button>
+              <button class="preset-btn" data-preset="divBy3">
+                <span class="preset-name">Divisible by 3</span>
+                <span class="preset-desc">unary mod-3 checker</span>
+              </button>
+            </div>
           </div>
-          <div class="preset-grid">
-            <button class="preset-btn" data-preset="increment">
-              <span class="preset-name">Binary Increment</span>
-              <span class="preset-desc">n → n+1</span>
-            </button>
-            <button class="preset-btn" data-preset="decrement">
-              <span class="preset-name">Binary Decrement</span>
-              <span class="preset-desc">n → n−1</span>
-            </button>
-            <button class="preset-btn" data-preset="onesComp">
-              <span class="preset-name">1's Complement</span>
-              <span class="preset-desc">flip all bits</span>
-            </button>
-            <button class="preset-btn" data-preset="twosComp">
-              <span class="preset-name">2's Complement</span>
-              <span class="preset-desc">negative integer</span>
-            </button>
-            <button class="preset-btn" data-preset="palindrome">
-              <span class="preset-name">Palindrome Check</span>
-              <span class="preset-desc">accepts 0/1 strings</span>
-            </button>
-            <button class="preset-btn" data-preset="unaryAdd">
-              <span class="preset-name">Unary Addition</span>
-              <span class="preset-desc">111+11 = 11111</span>
-            </button>
-            <button class="preset-btn" data-preset="anbn">
-              <span class="preset-name">Equal aⁿbⁿ</span>
-              <span class="preset-desc">accepts aⁿbⁿ strings</span>
-            </button>
-            <button class="preset-btn" data-preset="divBy3">
-              <span class="preset-name">Divisible by 3</span>
-              <span class="preset-desc">unary mod-3 checker</span>
-            </button>
-          </div>
-        </div>
 
-        <!-- Transition Rules -->
-        <div class="card field-full">
-          <div class="card-header">
-            <div class="card-icon brown">⚙️</div>
-            <h3>Transition Rules</h3>
-            <small>state, read, write, move, next_state</small>
-          </div>
-          <textarea id="rules-input" spellcheck="false" rows="9">q0, 0, 0, R, q0
+          <!-- Transition Rules -->
+          <div class="card field-full">
+            <div class="card-header">
+              <div class="card-icon brown">⚙️</div>
+              <h3>Transition Rules</h3>
+              <small>state, read, write, move, next_state</small>
+            </div>
+            <textarea id="rules-input" spellcheck="false" rows="9">q0, 0, 0, R, q0
 q0, 1, 1, R, q0
 q0, _, _, L, q1
 q1, 0, 1, L, qStop
 q1, 1, 0, L, q1
 q1, _, 1, L, qStop</textarea>
-          <div class="expr-help-panel">
-            <h4>Rule Syntax</h4>
-            <div class="expr-example">
-              <code>state, read, write, move, next</code>
-              <span>5 comma-separated fields per line</span>
+            <div class="expr-help-panel">
+              <h4>Rule Syntax</h4>
+              <div class="expr-example">
+                <code>state, read, write, move, next</code>
+                <span>5 comma-separated fields per line</span>
+              </div>
+              <div class="expr-example">
+                <code>q0, 1, 0, R, q1</code>
+                <span>In q0, reading 1: write 0, move Right, go to q1</span>
+              </div>
+              <div class="expr-example">
+                <code>qStop</code>
+                <span>Halt state (also: qHalt, qAccept, qReject)</span>
+              </div>
+              <div class="expr-example">
+                <code>_</code>
+                <span>Blank symbol on tape</span>
+              </div>
             </div>
-            <div class="expr-example">
-              <code>q0, 1, 0, R, q1</code>
-              <span>In q0, reading 1: write 0, move Right, go to q1</span>
+            <div class="actions-row">
+              <button class="btn btn-primary" id="btn-initialize">
+                <span>▶</span> Initialize Machine
+              </button>
             </div>
-            <div class="expr-example">
-              <code>qStop</code>
-              <span>Halt state (also: qHalt, qAccept, qReject)</span>
-            </div>
-            <div class="expr-example">
-              <code>_</code>
-              <span>Blank symbol on tape</span>
-            </div>
-          </div>
-          <div class="actions-row">
-            <button class="btn btn-primary" id="btn-initialize">
-              <span>▶</span> Initialize Machine
-            </button>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- RUN VIEW -->
-    <div id="run-view">
+      <!-- RUN VIEW -->
+      <div id="run-view">
 
-      <!-- Result Banner (hidden until halt) -->
-      <div class="result-banner" id="result-banner">
-        <div class="result-icon" id="result-icon">✓</div>
-        <div class="result-body">
-          <div class="result-steps-pill" id="result-steps-pill">0 steps</div>
-          <div class="result-title" id="result-title">ACCEPTED</div>
-          <div class="result-subtitle" id="result-subtitle">The input string was accepted.</div>
-          <div class="result-tape-preview" id="result-tape-preview"><strong>Tape:</strong> —</div>
-        </div>
-        <button class="result-dismiss" id="result-dismiss">✕ Dismiss</button>
-      </div>
-
-      <!-- Control Bar -->
-      <div class="control-bar">
-        <button class="btn btn-ghost" id="btn-edit">← Edit</button>
-        <div class="divider"></div>
-
-        <button class="btn btn-icon btn-ghost" id="btn-back" title="Step Back">⏮</button>
-        <button class="btn btn-icon btn-outline" id="btn-step" title="Single Step">⏭</button>
-        <button class="btn btn-run" id="btn-run">▶ Run</button>
-        <button class="btn btn-icon btn-ghost" id="btn-reset" title="Reset">↺</button>
-
-        <div class="divider"></div>
-
-        <div class="speed-control">
-          <span class="speed-label">SPEED</span>
-          <input type="range" id="speed-slider" min="1" max="10" value="5">
-        </div>
-
-        <div class="spacer"></div>
-
-        <div class="state-badge" id="state-badge">q0</div>
-        <div class="step-info">Step <span id="step-counter">0</span></div>
-      </div>
-
-      <!-- Tape -->
-      <div class="tape-container" id="tape-container">
-        <div class="tape-header">
-          <h4>TAPE</h4>
-          <div class="rule-hint" id="rule-hint">Waiting to run…</div>
-        </div>
-        <div class="tape-window">
-          <div class="tape-head-beam"></div>
-          <div class="tape-head-line"></div>
-          <div class="tape-track" id="tape-track"></div>
-        </div>
-
-        <!-- State Trace -->
-        <div class="state-trace-section">
-          <div class="state-trace-header">
-            <h4>STATE TRACE</h4>
-            <span class="trace-count" id="trace-count">0 transitions</span>
+        <!-- Result Banner (hidden until halt) -->
+        <div class="result-banner" id="result-banner">
+          <div class="result-icon" id="result-icon">✓</div>
+          <div class="result-body">
+            <div class="result-steps-pill" id="result-steps-pill">0 steps</div>
+            <div class="result-title" id="result-title">ACCEPTED</div>
+            <div class="result-subtitle" id="result-subtitle">The input string was accepted.</div>
+            <div class="result-tape-preview" id="result-tape-preview"><strong>Tape:</strong> —</div>
           </div>
-          <div class="state-trace-scroll" id="state-trace-scroll">
-            <div class="state-trace-track" id="state-trace-track">
-              <div class="trace-entry">
-                <div class="trace-state current" id="initial-trace-state">q0</div>
+          <button class="result-dismiss" id="result-dismiss">✕ Dismiss</button>
+        </div>
+
+        <!-- Control Bar -->
+        <div class="control-bar">
+          <button class="btn btn-ghost" id="btn-edit">← Edit</button>
+          <div class="divider"></div>
+
+          <button class="btn btn-icon btn-ghost" id="btn-back" title="Step Back">⏮</button>
+          <button class="btn btn-icon btn-outline" id="btn-step" title="Single Step">⏭</button>
+          <button class="btn btn-run" id="btn-run">▶ Run</button>
+          <button class="btn btn-icon btn-ghost" id="btn-reset" title="Reset">↺</button>
+
+          <div class="divider"></div>
+
+          <div class="speed-control">
+            <span class="speed-label">SPEED</span>
+            <input type="range" id="speed-slider" min="1" max="10" value="5">
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="state-badge" id="state-badge">q0</div>
+          <div class="step-info">Step <span id="step-counter">0</span></div>
+        </div>
+
+        <!-- Tape -->
+        <div class="tape-container" id="tape-container">
+          <div class="tape-header">
+            <h4>TAPE</h4>
+            <div class="rule-hint" id="rule-hint">Waiting to run…</div>
+          </div>
+          <div class="tape-window">
+            <div class="tape-head-beam"></div>
+            <div class="tape-head-line"></div>
+            <div class="tape-track" id="tape-track"></div>
+          </div>
+
+          <!-- State Trace -->
+          <div class="state-trace-section">
+            <div class="state-trace-header">
+              <h4>STATE TRACE</h4>
+              <span class="trace-count" id="trace-count">0 transitions</span>
+            </div>
+            <div class="state-trace-scroll" id="state-trace-scroll">
+              <div class="state-trace-track" id="state-trace-track">
+                <div class="trace-entry">
+                  <div class="trace-state current" id="initial-trace-state">q0</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Tabs -->
+        <div class="tabs-wrapper">
+          <nav class="tabs-nav">
+            <button class="tab-btn active" data-tab="tab-table">Transition Table</button>
+            <button class="tab-btn" data-tab="tab-diagram">State Diagram</button>
+            <button class="tab-btn" data-tab="tab-history">Step History</button>
+          </nav>
+
+          <!-- Transition Table -->
+          <div class="tab-panel active" id="tab-table">
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>State</th>
+                    <th>Read</th>
+                    <th>Write</th>
+                    <th>Move</th>
+                    <th>Next State</th>
+                  </tr>
+                </thead>
+                <tbody id="rules-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- State Diagram -->
+          <div class="tab-panel" id="tab-diagram">
+            <div class="diagram-panel" id="diagram-panel">
+              <div id="mermaid-container"></div>
+            </div>
+          </div>
+
+          <!-- Step History -->
+          <div class="tab-panel" id="tab-history">
+            <div class="history-header">
+              <span>#</span>
+              <span>Tape Snapshot</span>
+              <span>State</span>
+              <span style="grid-column:4/6">Rule Applied</span>
+            </div>
+            <div class="history-list" id="history-list">
+              <div class="history-empty">No steps taken yet</div>
+            </div>
+          </div>
+        </div>
+
       </div>
-
-      <!-- Tabs -->
-      <div class="tabs-wrapper">
-        <nav class="tabs-nav">
-          <button class="tab-btn active" data-tab="tab-table">Transition Table</button>
-          <button class="tab-btn" data-tab="tab-diagram">State Diagram</button>
-          <button class="tab-btn" data-tab="tab-history">Step History</button>
-        </nav>
-
-        <!-- Transition Table -->
-        <div class="tab-panel active" id="tab-table">
-          <div class="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  <th>State</th>
-                  <th>Read</th>
-                  <th>Write</th>
-                  <th>Move</th>
-                  <th>Next State</th>
-                </tr>
-              </thead>
-              <tbody id="rules-tbody"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- State Diagram -->
-        <div class="tab-panel" id="tab-diagram">
-          <div class="diagram-panel" id="diagram-panel">
-            <div id="mermaid-container"></div>
-          </div>
-        </div>
-
-        <!-- Step History -->
-        <div class="tab-panel" id="tab-history">
-          <div class="history-header">
-            <span>#</span>
-            <span>Tape Snapshot</span>
-            <span>State</span>
-            <span style="grid-column:4/6">Rule Applied</span>
-          </div>
-          <div class="history-list" id="history-list">
-            <div class="history-empty">No steps taken yet</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
     </div>
   </div>
 

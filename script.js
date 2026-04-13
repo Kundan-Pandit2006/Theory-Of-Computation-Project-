@@ -2,7 +2,7 @@
 function handleRouting() {
   const navLinks = document.querySelectorAll('.nav-link');
   const ctaButtons = document.querySelectorAll('[href="/demonstration"]');
-  
+
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -54,22 +54,22 @@ function showSimSubView(id) {
 }
 
 // ─── THEME TOGGLE ───
-(function() {
+(function () {
   const themeToggle = document.getElementById('theme-toggle');
   const htmlElement = document.documentElement;
-  
+
   // Check for saved theme preference or default to light mode
   const savedTheme = localStorage.getItem('theme') || 'light';
   if (savedTheme === 'dark') {
     htmlElement.classList.add('dark-mode');
     themeToggle.classList.add('active');
   }
-  
+
   // Toggle theme on click
   themeToggle.addEventListener('click', () => {
     htmlElement.classList.toggle('dark-mode');
     themeToggle.classList.toggle('active');
-    
+
     // Save preference
     const isDark = htmlElement.classList.contains('dark-mode');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -94,16 +94,17 @@ function showSimSubView(id) {
 mermaid.initialize({
   startOnLoad: false,
   theme: 'base',
-  flowchart: { htmlLabels: true, curve: 'basis', nodeSpacing: 100, rankSpacing: 160 },
+  flowchart: {
+    htmlLabels: true, // Required for <br/> in labels
+    curve: 'basis',
+    nodeSpacing: 100,
+    rankSpacing: 160
+  },
   themeVariables: {
     primaryColor: '#f0e9de',
-    primaryTextColor: '#1c1008',
-    primaryBorderColor: '#6f4e37',
     lineColor: '#9c7355',
-    secondaryColor: '#e8ddd0',
-    tertiaryColor: '#faf7f2',
-    fontSize: '18px',
-    fontFamily: "'JetBrains Mono', monospace"
+    fontSize: '14px',
+    fontFamily: "'Space Mono', monospace"
   }
 });
 
@@ -231,7 +232,7 @@ function hideResultBanner() {
 }
 
 // ─── INITIALIZE DOM REFS & EVENT LISTENERS ───
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Setup routing first
   handleRouting();
 
@@ -333,10 +334,10 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('keydown', e => {
     if ($('setup-view').classList.contains('active')) return;
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    if (e.key === ' ')           { e.preventDefault(); toggleRun(); }
-    if (e.key === 'ArrowRight')  { e.preventDefault(); stopRun(); step(); }
-    if (e.key === 'ArrowLeft')   { e.preventDefault(); stepBack(); }
-    if (e.key === 'r')           { e.preventDefault(); stopRun(); initialize(); }
+    if (e.key === ' ') { e.preventDefault(); toggleRun(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); stopRun(); step(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); stepBack(); }
+    if (e.key === 'r') { e.preventDefault(); stopRun(); initialize(); }
   });
 });
 
@@ -416,8 +417,7 @@ async function parseRules() {
   const lines = el.rulesInput.value.split('\n');
   let mermaidSrc = 'graph LR\n';
   const allStates = new Set();
-  const edges = {};
-  let count = 0;
+  const edges = {}; // Stores labels grouped by unique state transitions
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
@@ -426,9 +426,21 @@ async function parseRules() {
     if (parts.length !== 5) continue;
 
     const [state, read, write, move, nextState] = parts;
+
+    // Internal Logic
     if (!machine.rules[state]) machine.rules[state] = {};
     machine.rules[state][read] = { write, move, nextState, raw: line, index: i };
 
+    // Grouping for the Diagram
+    allStates.add(state);
+    allStates.add(nextState);
+    const edgeKey = `${state}||${nextState}`;
+    if (!edges[edgeKey]) edges[edgeKey] = [];
+
+    // Formatting the label: "read → write, move"
+    edges[edgeKey].push(`${read} → ${write}, ${move}`);
+
+    // Build rules table
     const tr = document.createElement('tr');
     tr.id = `rule-${i}`;
     parts.forEach(p => {
@@ -437,36 +449,31 @@ async function parseRules() {
       tr.appendChild(td);
     });
     el.rulesTbody.appendChild(tr);
-
-    allStates.add(state); allStates.add(nextState);
-    const ek = `${state}||${nextState}`;
-    if (!edges[ek]) edges[ek] = [];
-    edges[ek].push(`${read}→${write},${move}`);
-    count++;
   }
 
-  // Define oval nodes
+  // Create Nodes
   allStates.forEach(s => {
-    const shape = s.toLowerCase().includes('stop') || s.toLowerCase().includes('halt') ||
-      s.toLowerCase().includes('accept') || s.toLowerCase().includes('reject')
-      ? `${s}((( ${s} )))` : `${s}([ ${s} ])`;
+    const isHalt = /halt|stop|accept|reject/i.test(s);
+    const shape = isHalt ? `${s}((( ${s} )))` : `${s}([ ${s} ])`;
     mermaidSrc += `    ${shape}\n`;
   });
 
-  for (const ek in edges) {
-    const [s, ns] = ek.split('||');
-    const lbl = edges[ek].join('<br>');
-    mermaidSrc += `    ${s} -->|"${lbl}"| ${ns}\n`;
+  // Create Arrows with Labels
+  for (const key in edges) {
+    const [from, to] = key.split('||');
+    const label = edges[key].join('<br/>'); // Join multiple rules on one arrow
+    mermaidSrc += `    ${from} -->|"${label}"| ${to}\n`;
   }
 
-  if (count > 0) {
+  // Render Diagram
+  if (allStates.size > 0) {
     try {
       el.mermaidContainer.innerHTML = '';
       const { svg } = await mermaid.render(`graph-${Date.now()}`, mermaidSrc);
       el.mermaidContainer.innerHTML = svg;
       el.mermaidContainer.style.animation = 'fadeUp 0.8s ease forwards';
     } catch (e) {
-      console.error("Mermaid Render Error:", e);
+      console.error("Mermaid error:", e);
       el.mermaidContainer.innerHTML = '<p class="diagram-empty">Diagram render failed — check console.</p>';
     }
   }
@@ -689,6 +696,13 @@ function highlightDiagram() {
     machine.discoveredEdges.forEach(edgeKey => {
       document.querySelectorAll(`[id^="L-${edgeKey}"]`).forEach(el => el.classList.add('discovered'));
       document.querySelectorAll(`[id^="L-L-${edgeKey}"]`).forEach(el => el.classList.add('discovered'));
+    });
+    // Also mark edge labels as discovered
+    document.querySelectorAll('.edgeLabels .edgeLabel').forEach(labelGroup => {
+      const labelId = labelGroup.id || '';
+      machine.discoveredEdges.forEach(edgeKey => {
+        if (labelId.includes(edgeKey)) labelGroup.classList.add('discovered');
+      });
     });
   }
 
