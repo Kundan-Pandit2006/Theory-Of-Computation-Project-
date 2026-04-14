@@ -41,43 +41,43 @@
   --t: 0.25s ease;
 }
 
-/* ── Dark Mode: Deep Rose & Charcoal ── */
+/* ── Dark Mode: Cyan/Teal Palette (Requested) ── */
 html.dark-mode {
-  --bg: #1a0f14;
-  --bg-warm: #251518;
-  --surface: #2a1720;
-  --surface-2: #3a2330;
-  --surface-3: #4a3140;
+  --bg: #10151a;
+  --bg-warm: #131a20;
+  --surface: #161e24;
+  --surface-2: #1e2830;
+  --surface-3: #26333c;
 
-  --border: rgba(217, 109, 147, 0.18);
-  --border-2: rgba(217, 109, 147, 0.28);
-  --border-strong: rgba(217, 109, 147, 0.45);
+  --border: rgba(113, 201, 206, 0.18); /* #71c9ce */
+  --border-2: rgba(113, 201, 206, 0.28);
+  --border-strong: rgba(113, 201, 206, 0.45);
 
-  /* Text */
-  --text: #f5e8eb;
-  --text-2: #d9a8bf;
-  --text-3: #a8728a;
+  /* Text - very light cyan for dark background */
+  --text: #e3fdfd;
+  --text-2: #cbf1f5;
+  --text-3: #a6e3e9;
 
-  /* Primary accent - Bright Rose */
-  --coffee: #f089b5;
-  --coffee-light: #f5a8ca;
-  --coffee-dim: rgba(240, 137, 181, 0.15);
-  --coffee-glow: rgba(240, 137, 181, 0.35);
+  /* Primary accent - Vibrant Teal */
+  --coffee: #71c9ce;
+  --coffee-light: #85d6db;
+  --coffee-dim: rgba(113, 201, 206, 0.15);
+  --coffee-glow: rgba(113, 201, 206, 0.35);
 
-  /* Accent - Bright Coral */
-  --amber: #ff9b7f;
-  --amber-dim: rgba(255, 155, 127, 0.15);
-  --amber-glow: rgba(255, 155, 127, 0.40);
+  /* Accent */
+  --amber: #a6e3e9;
+  --amber-dim: rgba(166, 227, 233, 0.15);
+  --amber-glow: rgba(166, 227, 233, 0.40);
 
-  /* Secondary accent - Bright Mauve */
-  --brown: #e888b0;
-  --brown-dim: rgba(232, 136, 176, 0.12);
+  /* Secondary accent */
+  --brown: #cbf1f5;
+  --brown-dim: rgba(203, 241, 245, 0.12);
 
   /* State colors */
-  --green: #7dd9c8;
-  --green-dim: rgba(125, 217, 200, 0.15);
-  --halt: #ff8888;
-  --halt-dim: rgba(255, 136, 136, 0.15);
+  --green: #71c9ce;
+  --green-dim: rgba(113, 201, 206, 0.15);
+  --halt: #e67e7e;
+  --halt-dim: rgba(230, 126, 126, 0.15);
 }
 
 *,
@@ -117,8 +117,8 @@ body::before {
 
 html.dark-mode body::before {
   background-image:
-    radial-gradient(ellipse 70% 60% at 20% 0%, rgba(240, 137, 181, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(255, 155, 127, 0.06) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 60% at 20% 0%, rgba(113, 201, 206, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(166, 227, 233, 0.06) 0%, transparent 60%);
 }
 
 /* Dot grid pattern */
@@ -134,7 +134,7 @@ body::after {
 }
 
 html.dark-mode body::after {
-  background-image: radial-gradient(circle, rgba(240, 137, 181, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(113, 201, 206, 0.15) 1px, transparent 1px);
 }
 
 .app-shell {
@@ -1238,7 +1238,7 @@ tbody tr.active-rule td:first-child {
   overflow: auto;
 }
 
-.diagram-panel .mermaid {
+#mermaid-container {
   width: 100%;
   padding: 10px;
   display: flex;
@@ -1246,14 +1246,13 @@ tbody tr.active-rule td:first-child {
   overflow: visible;
 }
 
-.diagram-panel .mermaid svg {
+#mermaid-container svg {
   width: 100%;
-  min-width: 750px;
-  max-width: 960px;
+  min-width: 850px;
+  max-width: 100%;
   height: auto !important;
-  transform: scale(1.2);
-  transform-origin: center top;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .diagram-empty {
@@ -1270,11 +1269,35 @@ tbody tr.active-rule td:first-child {
   border-radius: 4px;
   font-family: 'Space Mono', monospace;
   font-size: 0.7rem;
-  color: var(--coffee);
+  color: var(--coffee) !important;
+  fill: var(--coffee) !important;
+}
+
+.edgeLabel rect, .edgeLabel span {
+  fill: var(--surface) !important;
+  background-color: var(--surface) !important;
+  color: var(--coffee) !important;
+}
+
+/* Ensure node shapes and text are visible in dark mode */
+html.dark-mode .node rect,
+html.dark-mode .node circle,
+html.dark-mode .node ellipse,
+html.dark-mode .node polygon,
+html.dark-mode .node path {
+  fill: var(--surface-2) !important;
+  stroke: var(--coffee) !important;
+}
+
+html.dark-mode .node .label,
+html.dark-mode .node span,
+html.dark-mode .node text {
+  color: var(--text) !important;
+  fill: var(--text) !important;
 }
 
 /* Ensure arrows don't overlap labels too much */
-.mermaid svg {
+#mermaid-container svg {
   max-width: 100%;
   height: auto;
 }
